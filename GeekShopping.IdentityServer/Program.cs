@@ -37,6 +37,7 @@ secondBuilder.AddDeveloperSigningCredential();
 
 var app = builder.Build();
 
+
 // Add services to the container.
 
 
@@ -54,6 +55,7 @@ app.UseRouting();
 app.UseIdentityServer();
 
 app.UseAuthorization();
+
 
 using (var scope = app.Services.CreateScope())
 {
