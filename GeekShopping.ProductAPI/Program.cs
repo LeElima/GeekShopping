@@ -59,7 +59,7 @@ builder.Services.AddSwaggerGen(c =>
     }}) ;
 });
 
-builder.Services.AddDbContext<SQLContext>(x => x.UseSqlServer(configuration.GetConnectionString("geekshopping_identityserver")));
+builder.Services.AddDbContext<SQLContext>(x => x.UseSqlServer(configuration.GetConnectionString("teste")));
 
 IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
@@ -74,8 +74,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.UseHttpsRedirection();
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
