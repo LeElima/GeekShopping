@@ -93,6 +93,7 @@ namespace GeekShopping.CartAPI.Repository
                 ct.CartDetails.FirstOrDefault().CartHeaderId = ct.CartHeader.Id;
                 ct.CartDetails.FirstOrDefault().CartProduct = null;
                 _context.CartDetails.Add(ct.CartDetails.FirstOrDefault());
+
                 await _context.SaveChangesAsync();
             }
             else
