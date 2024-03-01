@@ -28,6 +28,7 @@ builder.Services.AddAuthentication(options =>
     });
 builder.Services.AddHttpClient<IProductService, ProductService>(c => c.BaseAddress = new Uri(configuration["ServiceUrls:ProductAPI"]));
 builder.Services.AddHttpClient<ICartService, CartService>(c => c.BaseAddress = new Uri(configuration["ServiceUrls:CartAPI"]));
+//builder.Services.AddHttpClient<IC, CartService>(c => c.BaseAddress = new Uri(configuration["ServiceUrls:CartAPI"]));
 
 var app = builder.Build();
 
