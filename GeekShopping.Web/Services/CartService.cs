@@ -61,15 +61,6 @@ namespace GeekShopping.Web.Services
         public async Task<CartHeaderViewModel> Checkout(CartHeaderViewModel model, string token)
         {
             _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            try
-            {
-                var responses = await _client.PostAsJson($"{BASEPATH}/checkout", model);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
             var response = await _client.PostAsJson($"{BASEPATH}/checkout", model);
             if (response.IsSuccessStatusCode) return await response.ReadContentAs<CartHeaderViewModel>();
             else throw new Exception("Something went wrong when calling API");

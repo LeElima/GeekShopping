@@ -22,7 +22,7 @@ namespace GeekShopping.CartAPI.RabbitMQSender
         {
             var factory = new ConnectionFactory
             {
-                HostName = _password,
+                HostName = _hostName,
                 UserName = _userName,
                 Password= _password,
             };
