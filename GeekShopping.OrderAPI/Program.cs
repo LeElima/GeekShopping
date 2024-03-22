@@ -1,3 +1,5 @@
+using GeekShopping.CartAPI.Repository;
+using GeekShopping.OrderAPI.MessageConsumer;
 using GeekShopping.OrderAPI.Model.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -56,13 +58,10 @@ builder.Services.AddSwaggerGen(c =>
         }});
 });
 builder.Services.AddDbContext<SQLContext>(x => x.UseSqlServer(configuration.GetConnectionString("teste")));
-
-//IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
-//builder.Services.AddSingleton(mapper);
-//builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-//builder.Services.AddScoped<ICartRepository, CartRepository>();
-//builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+var bd = new DbContextOptionsBuilder<SQLContext>();
+bd.UseSqlServer(configuration.GetConnectionString("teste"));
+builder.Services.AddSingleton(new OrderRepository(bd.Options));
+builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 var app = builder.Build();
